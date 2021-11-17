@@ -68,7 +68,7 @@ public class OTPService {
         }
     	if(checkEmail(inputotp.getEmail())) {
     		OTP otp = new OTP();
-    		//otp=inputotp;
+    		
             otp.setEmail(inputotp.getEmail());
             otp.setOrderId();
             otp.setChannelName(inputotp.getChannelName());
@@ -76,7 +76,6 @@ public class OTPService {
             otp.setOtp(generateOTP());
             otp.setVerified(false);
             otp.setCreated_at(new Date().getTime() /1000);
-            //sendOTPMail(otp);
             dao.saveAndFlush(otp);
             return "successfully";
     	}
@@ -97,9 +96,9 @@ public class OTPService {
         	response.setStatus(false);
         	System.out.println("-----------------------------------");
         	throw new EmailNotFoundException("Email Not Exixts");
-        	  //return response.toString();
+        	  
         }
-     // System.out.println("------------------------------------------");
+     
        
         List<OTP> otps;
         otps = (dao.findByEmailAndOtpAndVerified(otp.getEmail(),otp.getOtp(),false));
@@ -135,7 +134,6 @@ public class OTPService {
 			LOGGER.info("Inside send OTP to sms");
 			// TODO Auto-generated method stub
 			OTP otp = new OTP();
-    		//otp=inputotp;
             otp.setEmail(inputotp.getEmail());
             otp.setOrderId();
             otp.setChannelName(inputotp.getChannelName());
